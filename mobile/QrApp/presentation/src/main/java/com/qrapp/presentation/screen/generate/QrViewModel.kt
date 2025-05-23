@@ -101,7 +101,7 @@ class QrViewModel @Inject constructor(
                 val duration = Duration.between(now, expiresAt)
                 val seconds = duration.seconds
                 if (seconds <= 0) {
-                    _uiState.update { it.copy(timeLeft = "Expirado") }
+                    _uiState.update { it.copy(timeLeft = "-") }
                     break
                 } else {
                     val min = seconds / 60
