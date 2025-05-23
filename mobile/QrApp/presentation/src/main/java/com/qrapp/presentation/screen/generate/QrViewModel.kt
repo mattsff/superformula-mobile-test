@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class GenerateViewModel @Inject constructor(
+class QrViewModel @Inject constructor(
     private val observeAutoRefreshingSeedUseCase: ObserveAutoRefreshingSeedUseCase,
 ) : ViewModel() {
 

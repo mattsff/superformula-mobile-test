@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,12 +18,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.qrapp.presentation.R
+import com.qrapp.presentation.components.QrAppScaffold
 import com.qrapp.presentation.utils.toErrorMessage
 
 @Composable
-fun ScanScreen(viewModel: ScanViewModel = hiltViewModel()) {
+fun ScanScreen(navController: NavController, viewModel: ScanViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -37,32 +39,28 @@ fun ScanScreen(viewModel: ScanViewModel = hiltViewModel()) {
         }
     }
 
-    Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-    ) { innerPadding ->
+    QrAppScaffold(
+        navController = navController,
+        showBack = true,
+        title = stringResource(R.string.scan_title),
+        snackbarHostState = snackbarHostState
+    ) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
-                .padding(innerPadding),
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Escanear QR", style = MaterialTheme.typography.h4)
+            Text(stringResource(R.string.scan_qr_code), style = MaterialTheme.typography.h4)
             Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                onClick = { viewModel.onQrCodeScanned("simulated-seed") },
-                enabled = !uiState.isLoading
-            ) {
-                Text(if (uiState.isLoading) "Escaneando..." else "Simular escaneo")
-            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             uiState.scanResult?.let {
-                Text("Resultado: ${it.seed}")
+                Text(stringResource(R.string.scan_result, it.seed))
             }
         }
     }
 }
+

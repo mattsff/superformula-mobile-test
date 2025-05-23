@@ -25,24 +25,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.qrapp.presentation.R
+import com.qrapp.presentation.components.QrAppScaffold
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    Scaffold(
+    QrAppScaffold(
+        navController = navController,
+        showBack = false,
+        title = stringResource(R.string.home_title),
         floatingActionButton = {
             HomeFab(navController)
         }
-    ) { padding ->
+    ) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
                 .padding(32.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.home_title),
+                text = stringResource(R.string.home_welcome),
                 style = MaterialTheme.typography.h4
             )
         }

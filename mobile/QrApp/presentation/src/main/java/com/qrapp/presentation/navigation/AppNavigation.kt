@@ -15,8 +15,8 @@ fun AppNavigation() {
 
     NavHost(navController, startDestination = "home") {
         composable("home") { HomeScreen(navController) }
-        composable("generate") { GenerateScreen() }
-        composable("scan") { ScanScreen() }
+        composable("generate") { GenerateScreen(navController) }
+        composable("scan") { ScanScreen(navController) }
     }
 }
 

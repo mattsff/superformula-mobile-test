@@ -2,9 +2,17 @@
     <string name="app_name">QrApp</string>
     <string name="error_network">A network error occurred. Please check your connection and try again.</string>
     <string name="error_unknown">An unexpected error occurred. Please try again.</string>
-    <string name="home_title">Welcome to QR App</string>
+    <string name="home_title">Home</string>
+    <string name="home_welcome">Welcome to QR App</string>
     <string name="cd_go_to_scan">Go to Scan</string>
     <string name="cd_go_to_qr">Go to QR</string>
     <string name="cd_add">Expand menu</string>
+    <string name="cd_back">Go back</string>
+    <string name="qr_title">QR Code</string>
+    <string name="qr_generated_code">Generated code</string>
+    <string name="scan_title">Scan</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="scan_scanning">Scanning…</string>
+    <string name="scan_result">Result: %1$s</string>
 
 </resources>
