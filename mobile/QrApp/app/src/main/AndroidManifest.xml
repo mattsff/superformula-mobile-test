@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:name=".QrApp"
         android:theme="@style/Theme.QrApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31" >
 
         <activity

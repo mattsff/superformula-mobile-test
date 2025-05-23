@@ -9,6 +9,6 @@ interface QrApiService {
     @GET("/seed")
     suspend fun getSeed(): QrSeedDto
 
-    @GET("/validate")
+    @GET("/seed/validate")
     suspend fun validateSeed(@Query("seed") seed: String): QrScanResultDto
 }

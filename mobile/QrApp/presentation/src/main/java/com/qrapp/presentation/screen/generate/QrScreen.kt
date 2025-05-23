@@ -51,9 +51,8 @@ fun GenerateScreen(navController: NavController, viewModel: QrViewModel = hiltVi
             Text(stringResource(R.string.qr_generated_code), style = MaterialTheme.typography.h6)
             Spacer(modifier = Modifier.height(16.dp))
 
-            Box(
+            Column (
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
             ) {
                 uiState.qrBitmap?.let { bmp ->
                     Image(bitmap = bmp.asImageBitmap(), contentDescription = null)

@@ -9,13 +9,13 @@ import java.time.Instant
 fun QrSeedDto.toDomain(): QrSeed {
     return QrSeed(
         seed = this.seed,
-        expiresAt = Instant.parse(this.expires_at)
+        expiresAt = Instant.ofEpochMilli(this.expires_at)
     )
 }
 
 fun QrScanResultDto.toDomain(): QrScanResult {
     return QrScanResult(
         isValid = this.valid,
-        seed = this.message
+        seed = this.reason
     )
 }
