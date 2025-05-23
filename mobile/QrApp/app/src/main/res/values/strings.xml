@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QrApp</string>
+    <string name="error_network">A network error occurred. Please check your connection and try again.</string>
+    <string name="error_unknown">An unexpected error occurred. Please try again.</string>
+</resources>
