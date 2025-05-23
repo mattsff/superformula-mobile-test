@@ -7,19 +7,8 @@ const router = express.Router();
 // In-memory storage for seeds and their expiration
 const seedStorage = new Map(); // seed -> expiration (Date object)
 
-// Helper: remove expired seeds
-function cleanExpiredSeeds() {
-  const now = dayjs();
-  for (const [seed, expiration] of seedStorage.entries()) {
-    if (now.isAfter(expiration)) {
-      seedStorage.delete(seed);
-    }
-  }
-}
-
 // GET /seed - generate a new seed
 router.get("/", (req, res) => {
-  cleanExpiredSeeds();
   const seed = uuidv4().replace(/-/g, "");
   const expiration = dayjs().add(1, "minute").toDate();
   seedStorage.set(seed, expiration);
