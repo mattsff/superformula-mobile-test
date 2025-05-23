@@ -23,8 +23,32 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.qrapp.presentation.R
+import com.qrapp.presentation.components.CameraPermissionsHandler
 import com.qrapp.presentation.components.QrAppScaffold
 import com.qrapp.presentation.utils.toErrorMessage
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.core.app.ActivityCompat
+import com.google.mlkit.vision.barcode.Barcode
+import com.google.mlkit.vision.barcode.BarcodeScanner
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.common.InputImage
+import android.annotation.SuppressLint
+import android.graphics.ImageFormat
+import android.util.Size
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
 
 @Composable
 fun ScanScreen(navController: NavController, viewModel: ScanViewModel = hiltViewModel()) {
@@ -38,6 +62,15 @@ fun ScanScreen(navController: NavController, viewModel: ScanViewModel = hiltView
             viewModel.errorShown()
         }
     }
+
+    CameraPermissionsHandler(
+        showPermissionDialog = uiState.showPermissionDialog,
+        wasPermissionDenied = uiState.wasPermissionDenied,
+        onPermissionUpdated = { granted, shouldShowRationale ->
+            viewModel.onCameraPermissionResult(granted, shouldShowRationale)
+        },
+        onDismissDialog = { viewModel.dismissCameraPermissionsDialog() }
+    )
 
     QrAppScaffold(
         navController = navController,

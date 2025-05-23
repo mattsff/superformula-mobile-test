@@ -23,6 +23,8 @@ class ScanViewModel @Inject constructor(
         val isLoading: Boolean = false,
         val scanResult: QrScanResult? = null,
         val error: AppException? = null,
+        val showPermissionDialog: Boolean = false,
+        val wasPermissionDenied: Boolean = false
     )
 
     private val _uiState = MutableStateFlow(ScanUiState())
@@ -62,4 +64,22 @@ class ScanViewModel @Inject constructor(
     fun errorShown() {
         _uiState.update { it.copy(error = null) }
     }
+
+    fun onCameraPermissionResult(granted: Boolean, shouldShowRationale: Boolean) {
+        _uiState.update {
+            it.copy(
+                wasPermissionDenied = !granted && !shouldShowRationale,
+                showPermissionDialog = false
+            )
+        }
+    }
+
+    fun dismissCameraPermissionsDialog() {
+        _uiState.update { it.copy(showPermissionDialog = false, wasPermissionDenied = false) }
+    }
+
+    fun showCameraPermissionDialog() {
+        _uiState.update { it.copy(showPermissionDialog = true) }
+    }
+
 }

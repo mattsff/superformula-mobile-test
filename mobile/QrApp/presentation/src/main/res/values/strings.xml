@@ -15,6 +15,11 @@
     <string name="scan_scanning">Scanning…</string>
     <string name="scan_result">Result: %1$s</string>
 
+    <string name="camera_permission_denied_title">Permiso de cámara denegado</string>
+    <string name="camera_permission_denied_message">Debes habilitar el permiso de cámara desde la configuración de la app.</string>
+    <string name="go_to_settings">Ir a configuración</string>
+    <string name="cancel">Cancelar</string>
+
     <string name="cd_go_to_scan">Go to Scan</string>
     <string name="cd_go_to_qr">Go to QR</string>
     <string name="cd_add">Expand menu</string>
