@@ -118,4 +118,3 @@ class QrViewModel @Inject constructor(
         _uiState.update { it.copy(error = null) }
     }
 }
-

@@ -7,8 +7,11 @@
     <string name="home_generate_qr">Generate QR</string>
 
     <string name="qr_title">QR Code</string>
-    <string name="qr_generated_code">Generated code</string>
+    <string name="qr_generated_code">Your QR Code</string>
+    <string name="qr_seed_label">Seed</string>
+    <string name="qr_expiration_label">Expiration</string>
     <string name="qr_expires_in">Expires in: %1$s</string>
+    <string name="qr_error">An error occurred while generating the QR code.</string>
 
     <string name="scan_title">Scan</string>
     <string name="scan_qr_code">Scan QR Code</string>
