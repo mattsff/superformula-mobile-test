@@ -17,6 +17,11 @@
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="scan_scanning">Scanning…</string>
     <string name="scan_result">Result: %1$s</string>
+    <string name="scan_result_label">Scan Result</string>
+    <string name="scan_reason_label">Reason</string>
+    <string name="scan_expiration_label">Expiration</string>
+    <string name="scan_valid_qr">El QR escaneado es válido.</string>
+    <string name="scan_invalid_qr">El QR escaneado NO es válido.</string>
 
     <string name="camera_permission_denied_title">Permiso de cámara denegado</string>
     <string name="camera_permission_denied_message">Debes habilitar el permiso de cámara desde la configuración de la app.</string>

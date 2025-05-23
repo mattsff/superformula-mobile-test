@@ -16,6 +16,6 @@ fun QrSeedDto.toDomain(): QrSeed {
 fun QrScanResultDto.toDomain(): QrScanResult {
     return QrScanResult(
         isValid = this.valid,
-        seed = this.reason
+        reason = this.reason
     )
 }
