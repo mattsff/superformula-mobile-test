@@ -8,5 +8,5 @@ import com.qrapp.domain.util.Result
 interface QrRepository {
     suspend fun getSeed(): Result<QrSeed>
     suspend fun validateScannedCode(scannedSeed: String): Result<QrScanResult>
-    fun observeAutoRefreshingSeed(): Flow<Result<QrSeed>>
 }
+

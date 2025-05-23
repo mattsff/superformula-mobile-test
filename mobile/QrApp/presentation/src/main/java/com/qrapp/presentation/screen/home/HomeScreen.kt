@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -93,9 +92,12 @@ private fun HomeFab(navController: NavController) {
                     backgroundColor = secondaryFabColor,
                     contentColor = secondaryFabContentColor
                 ) {
-                    Icon(
-                        Icons.Filled.QrCode,
-                        contentDescription = stringResource(R.string.cd_go_to_qr)
+                    Text(
+                        text = stringResource(R.string.home_generate_qr),
+                        style = MaterialTheme.typography.button.copy(
+                            color = secondaryFabContentColor,
+                        ),
+                        modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
             }

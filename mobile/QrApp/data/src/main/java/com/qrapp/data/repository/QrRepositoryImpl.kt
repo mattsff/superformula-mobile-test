@@ -34,16 +34,4 @@ class QrRepositoryImpl @Inject constructor(
             Result.Error(e.toRemoteException())
         }
     }
-
-    override fun observeAutoRefreshingSeed(): Flow<Result<QrSeed>> = flow {
-        while (true) {
-            val result = getSeed()
-            emit(result)
-
-            val now = Instant.now()
-            val seedTime = (result as? Result.Success)?.data?.expiresAt ?: now
-            val delayDuration = Duration.between(now, seedTime).toMillis()
-            delay(delayDuration.coerceAtLeast(1000L))
-        }
-    }
 }

@@ -42,25 +42,29 @@ fun GenerateScreen(navController: NavController, viewModel: QrViewModel = hiltVi
         title = stringResource(R.string.qr_title),
         snackbarHostState = snackbarHostState
     ) { _ ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(stringResource(R.string.qr_generated_code), style = MaterialTheme.typography.h1)
+            Text(stringResource(R.string.qr_generated_code), style = MaterialTheme.typography.h6)
             Spacer(modifier = Modifier.height(16.dp))
 
-            uiState.qrSeed?.let {
-                val qrBitmap: Bitmap? = generateQrCodeBitmap(it.seed)
-                qrBitmap?.let { bmp ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                uiState.qrBitmap?.let { bmp ->
                     Image(bitmap = bmp.asImageBitmap(), contentDescription = null)
-                }
-                Text("${it.expiresAt}")
-            } ?: CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(8.dp))
+                    uiState.qrSeed?.let { seed ->
+                        Text(seed.seed)
+                        Text("${seed.expiresAt}")
+                        Text(stringResource(R.string.qr_expires_in, uiState.timeLeft))
+                    }
+                } ?: CircularProgressIndicator()
+            }
         }
     }
 }
-
