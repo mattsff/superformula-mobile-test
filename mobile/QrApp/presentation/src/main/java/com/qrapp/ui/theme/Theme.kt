@@ -6,17 +6,35 @@ import androidx.compose.material.Shapes
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import com.qrapp.ui.theme.*
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = BluePrimaryDark,
+    primaryVariant = BluePrimaryVariantDark,
+    secondary = BlueSecondaryDark,
+    background = BlueBackgroundDark,
+    surface = BlueSurfaceDark,
+    error = BlueErrorDark,
+    onPrimary = BlueOnPrimaryDark,
+    onSecondary = BlueOnSecondaryDark,
+    onBackground = BlueOnBackgroundDark,
+    onSurface = BlueOnSurfaceDark,
+    onError = BlueOnErrorDark
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = BluePrimaryLight,
+    primaryVariant = BluePrimaryVariantLight,
+    secondary = BlueSecondaryLight,
+    background = BlueBackgroundLight,
+    surface = BlueSurfaceLight,
+    error = BlueErrorLight,
+    onPrimary = BlueOnPrimaryLight,
+    onSecondary = BlueOnSecondaryLight,
+    onBackground = BlueOnBackgroundLight,
+    onSurface = BlueOnSurfaceLight,
+    onError = BlueOnErrorLight
 )
 
 @Composable
@@ -33,3 +51,4 @@ fun QrAppTheme(
         content = content
     )
 }
+

@@ -38,7 +38,7 @@ fun ScanScreen(viewModel: ScanViewModel = hiltViewModel()) {
     }
 
     Scaffold(
-        snackbarHost = { SnackbaºrHost(hostState = snackbarHostState) }
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { innerPadding ->
         Column(
             modifier = Modifier

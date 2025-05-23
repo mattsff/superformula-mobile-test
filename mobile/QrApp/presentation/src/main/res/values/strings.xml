@@ -2,4 +2,9 @@
     <string name="app_name">QrApp</string>
     <string name="error_network">A network error occurred. Please check your connection and try again.</string>
     <string name="error_unknown">An unexpected error occurred. Please try again.</string>
+    <string name="home_title">Welcome to QR App</string>
+    <string name="cd_go_to_scan">Go to Scan</string>
+    <string name="cd_go_to_qr">Go to QR</string>
+    <string name="cd_add">Expand menu</string>
+
 </resources>
