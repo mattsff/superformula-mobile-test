@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log
+dist/
+build/
+coverage/
+.DS_Store
+*.log
+
+# VSCode
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test output
+*.lcov
+
+# Misc
+*.tgz
+.idea/
