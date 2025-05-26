@@ -1,5 +1,6 @@
 package com.qrapp.data.di
 
+import com.qrapp.data.BuildConfig
 import com.qrapp.data.datasource.QrRemoteDataSource
 import com.qrapp.data.datasource.QrRemoteDataSourceImpl
 import com.qrapp.data.remote.QrApiService
@@ -20,8 +21,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {
-    private const val BASE_URL = "http://localhost:3000/"
-
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
@@ -43,8 +42,8 @@ object DataModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val json = Json { ignoreUnknownKeys = true }
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient) // Usa el OkHttpClient con el logger
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }

@@ -25,11 +25,6 @@ import java.time.Duration
 import java.time.Instant
 import javax.inject.Inject
 
-// Nueva interfaz para generar el Bitmap
-
-// Implementación concreta
-
-
 @HiltViewModel
 class QrViewModel @Inject constructor(
     private val observeAutoRefreshingSeedUseCase: ObserveAutoRefreshingSeedUseCase,
