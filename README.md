@@ -1,6 +1,6 @@
 # Superformula QR Seed Project
 
-This repository brings together a backend API and a modern Android app for generating and validating QR code seeds.
+This repository combines a backend API and a modern Android app for generating and validating QR code seeds.
 
 ---
 
@@ -29,5 +29,15 @@ This repository brings together a backend API and a modern Android app for gener
 
 - To launch the backend, go to the `server` directory and follow the instructions in its README.
 - To run the Android app, check the `mobile` directory and its README for setup steps.
+
+---
+
+## Demo
+- On the left, there’s a screenshot of a previously generated and expired code.
+- In the center, there’s an emulator currently generating new codes.
+- On the right, there’s a physical device actively scanning in real time.
+
+
+Uploading Screen Recording 2025-05-26 at 1.18.59 PM.mov…
 
 ---
