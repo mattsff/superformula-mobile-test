@@ -1,32 +1,33 @@
-# Superformula Mobile Developer Coding Test
+# Superformula QR Seed Project
 
-Make sure you read **all** of this document carefully, and follow the guidelines in it.
+This repository brings together a backend API and a modern Android app for generating and validating QR code seeds.
 
-## Requirements
+---
 
-There is only one test here currently, please review and get back to us.
+## Project Structure
 
-## What We Care About
+- **Server API**  
+  Node.js REST API for seed generation and validation.  
+  ➡️ [See server/README.md for details and usage.](server/README.md)
 
-Use any libraries that you would normally use if this were a real production App. Please note: we're interested in your code & the way you solve the problem, not how well you can use a particular library or feature.
+- **Android Mobile App**  
+  Android client for generating, displaying, and scanning QR seeds.  
+  ➡️ [See mobile/README.md for setup and features.](mobile/README.md)
 
-_We're interested in your method and how you approach the problem just as much as we're interested in the end result._
+---
 
-Here's what you should strive for:
+## What You'll Find Here
 
-- Good use of structure, security, and performance best practices.
-- Solid testing approach.
-- Extensible code.
+- A backend service with endpoints for seed creation and validation.
+- An Android app built with Jetpack Compose, supporting QR code generation and scanning.
+- Modular, maintainable codebases for both server and client.
+- Documentation for setup, testing, and further improvements in each component's README.
 
-## Q&A
+---
 
-> Where should I send back the result when I'm done?
+## Getting Started
 
-Fork this repo and send us a pull request when you think you are done. There is no deadline for this task unless otherwise noted to you directly.
+- To launch the backend, go to the `server` directory and follow the instructions in its README.
+- To run the Android app, check the `mobile` directory and its README for setup steps.
 
-> What if I have a question?
-
-Just create a new issue in this repo and we will respond and get back to you quickly.
-
-## Review
-The coding challenge is a take-home test upon which we'll be conducting a thorough code review once complete. The review will consist of meeting some more of our mobile engineers and giving a review of the solution you have designed. Please be prepared to share your screen and run/demo the application to the group. During this process, the engineers will be asking questions. 
+---

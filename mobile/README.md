@@ -56,7 +56,7 @@ You can run the unit tests from Android Studio:
 
 ## Configuration
 
-- API `BASE_URL` is set in the app's configuration.
+- API `BASE_URL` is set `data` module `build.gradle` file.
 
 ## TODO / Improvements
 

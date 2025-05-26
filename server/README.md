@@ -1,5 +1,7 @@
 # QR API Server
 
+A simple Node.js backend for generating and validating QR code seeds, designed to work with mobile or web clients.
+
 ## 📦 Requirements
 
 - Node.js v18+
@@ -12,35 +14,62 @@ npm install
 npm run start
 ```
 
+The server will run by default on [http://localhost:3000](http://localhost:3000).
+
 ## 🚀 Test
 
+Run all tests with:
+
 ```bash
-npm install
 npm run test
 ```
 
-## 📡 How to test the APIs
+Test results and coverage will be shown in the terminal.
 
-With the server running, you can test the endpoints using tools like `curl`, Postman, or your browser.
+## 📡 API Reference
 
-### Get a seed
+### Generate a Seed
 
-Endpoint: `GET /seed`
+- **Endpoint:** `GET /seed`
+- **Description:** Generates a new unique seed and returns its expiration timestamp (1 minute from creation).
+- **Example:**
 
-Example using curl:
+  ```bash
+  curl http://localhost:3000/seed
+  ```
 
-```bash
-curl http://localhost:3000/seed
-```
+- **Response:**
 
-Expected response:
+  ```json
+  {
+    "seed": "<uuid-value>",
+    "expires_at": <timestamp>
+  }
+  ```
 
-```json
-{
-  "seed": "<uuid-value>",
-  "expires_at": "<iso-expiration-date>"
-}
-```
+  - `seed`: Unique identifier generated.
+  - `expires_at`: Expiration time in milliseconds since epoch.
 
-- `seed`: unique identifier generated.
-- `expires_at`: expiration date and time for the seed (1 minute from generation).
+### Validate a Seed
+
+- **Endpoint:** `GET /seed/validate?seed=<seed>`
+- **Description:** Checks if a seed is valid, expired, or not found.
+- **Example:**
+
+  ```bash
+  curl "http://localhost:3000/seed/validate?seed=YOUR_SEED_HERE"
+  ```
+
+- **Response:**
+  - Valid:
+    ```json
+    { "valid": true }
+    ```
+  - Invalid:
+    ```json
+    { "valid": false, "reason": "Seed not found" }
+    ```
+  - Expired:
+    ```json
+    { "valid": false, "reason": "Seed expired" }
+    ```
