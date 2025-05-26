@@ -9,7 +9,7 @@ fun AppException.toErrorMessage(context: Context): String {
         is AppException.NetworkError -> context.getString(R.string.error_network)
         is AppException.UnknownError -> context.getString(R.string.error_unknown)
         is AppException.ApiError -> {
-            errorBody?.takeIf { it.isNotBlank() } ?: context.getString(R.string.error_unknown)
+            errorMessage?.takeIf { it.isNotBlank() } ?: context.getString(R.string.error_unknown)
         }
     }
 }
