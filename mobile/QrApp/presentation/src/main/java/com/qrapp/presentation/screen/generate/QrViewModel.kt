@@ -7,9 +7,11 @@ import com.qrapp.domain.model.QrSeed
 import com.qrapp.domain.usecase.ObserveAutoRefreshingSeedUseCase
 import com.qrapp.domain.util.AppException
 import com.qrapp.domain.util.Result
+import com.qrapp.presentation.utils.bitmap.QrCodeBitmapGenerator
 import com.qrapp.presentation.utils.dispatcher.DispatcherProvider
-import com.qrapp.presentation.utils.generateQrCodeBitmap
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,18 +19,22 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.Duration
 import java.time.Instant
 import javax.inject.Inject
 
+// Nueva interfaz para generar el Bitmap
+
+// Implementación concreta
+
+
 @HiltViewModel
 class QrViewModel @Inject constructor(
     private val observeAutoRefreshingSeedUseCase: ObserveAutoRefreshingSeedUseCase,
     private val dispatcherProvider: DispatcherProvider,
+    private val qrCodeBitmapGenerator: QrCodeBitmapGenerator
 ) : ViewModel() {
 
     data class QrUiState(
@@ -55,7 +61,7 @@ class QrViewModel @Inject constructor(
                 _uiState.update { currentState ->
                     when (result) {
                         is Result.Success -> {
-                            val qrBitmap = generateQrCodeBitmap(result.data.seed)
+                            val qrBitmap = qrCodeBitmapGenerator.generate(result.data.seed)
                             startTimer(result.data.expiresAt)
                             currentState.copy(
                                 isLoading = false,

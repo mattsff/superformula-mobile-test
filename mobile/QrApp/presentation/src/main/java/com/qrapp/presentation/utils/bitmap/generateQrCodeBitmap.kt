@@ -1,4 +1,4 @@
-package com.qrapp.presentation.utils
+package com.qrapp.presentation.utils.bitmap
 
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -8,7 +8,8 @@ import com.google.zxing.common.BitMatrix
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.set
 
-fun generateQrCodeBitmap(content: String, size: Int = 512): Bitmap? {
+fun generateQrCodeBitmap(content: String): Bitmap? {
+    val size = 512 // Size of the QR code bitmap in pixels
     return try {
         val bitMatrix: BitMatrix = MultiFormatWriter().encode(
             content,
