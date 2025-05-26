@@ -28,7 +28,7 @@ class QrViewModel @Inject constructor(
     private val observeAutoRefreshingSeedUseCase: ObserveAutoRefreshingSeedUseCase,
 ) : ViewModel() {
 
-    data class GenerateUiState(
+    data class QrUiState(
         val isLoading: Boolean = false,
         val qrSeed: QrSeed? = null,
         val qrBitmap: Bitmap? = null,
@@ -37,8 +37,8 @@ class QrViewModel @Inject constructor(
         val timeLeft: String = ""
     )
 
-    private val _uiState = MutableStateFlow(GenerateUiState(isLoading = true))
-    val uiState: StateFlow<GenerateUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(QrUiState(isLoading = true))
+    val uiState: StateFlow<QrUiState> = _uiState.asStateFlow()
 
     private var timerJob: Job? = null
 

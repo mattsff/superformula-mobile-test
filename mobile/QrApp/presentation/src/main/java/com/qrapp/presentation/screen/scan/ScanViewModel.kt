@@ -24,14 +24,17 @@ class ScanViewModel @Inject constructor(
         val scanResult: QrScanResult? = null,
         val error: AppException? = null,
         val showPermissionDialog: Boolean = false,
-        val wasPermissionDenied: Boolean = false
-    )
+        val wasPermissionDenied: Boolean = false,
+        val shouldResetScanner: Boolean = false
+    ) {
+        val hasScanResult: Boolean get() = scanResult != null
+    }
 
     private val _uiState = MutableStateFlow(ScanUiState())
     val uiState: StateFlow<ScanUiState> = _uiState.asStateFlow()
 
     fun onQrCodeScanned(scannedCode: String) {
-        _uiState.update { it.copy(isLoading = true, error = null) }
+        _uiState.update { it.copy(isLoading = true, error = null, shouldResetScanner = false) }
 
         viewModelScope.launch {
 
@@ -51,7 +54,8 @@ class ScanViewModel @Inject constructor(
                         it.copy(
                             isLoading = false,
                             scanResult = null,
-                            error = result.exception
+                            error = result.exception,
+                            shouldResetScanner = true // Reset scanner if API error
                         )
                     }
                 }
@@ -62,7 +66,29 @@ class ScanViewModel @Inject constructor(
     }
 
     fun errorShown() {
-        _uiState.update { it.copy(error = null) }
+        // No-op, error is cleared only on resetScan now
+    }
+
+    fun resetScan() {
+        _uiState.update {
+            it.copy(
+                scanResult = null,
+                isLoading = false,
+                error = null,
+                shouldResetScanner = true
+            )
+        }
+    }
+
+    fun resetScanIfNeeded() {
+        // Only reset scanner if error is not permission related
+        _uiState.update {
+            if (!it.showPermissionDialog && !it.wasPermissionDenied) {
+                it.copy(shouldResetScanner = true)
+            } else {
+                it
+            }
+        }
     }
 
     fun onCameraPermissionResult(granted: Boolean, shouldShowRationale: Boolean) {

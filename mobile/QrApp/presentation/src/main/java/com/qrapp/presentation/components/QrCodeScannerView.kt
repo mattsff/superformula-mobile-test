@@ -18,7 +18,8 @@ import java.util.concurrent.Executors
 @Composable
 fun QrCodeScannerView(
     modifier: Modifier = Modifier,
-    onQrCodeScanned: (String) -> Unit
+    onQrCodeScanned: (String) -> Unit,
+    shouldReset: Boolean = false
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -26,6 +27,13 @@ fun QrCodeScannerView(
     val previewView = remember { PreviewView(context) }
     val executor = remember { Executors.newSingleThreadExecutor() }
     var isScanning by remember { mutableStateOf(true) }
+
+    // Reset scanning if shouldReset changes to true
+    LaunchedEffect(shouldReset) {
+        if (shouldReset) {
+            isScanning = true
+        }
+    }
 
     DisposableEffect(Unit) {
         val cameraProvider = cameraProviderFuture.get()
