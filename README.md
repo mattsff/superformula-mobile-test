@@ -37,7 +37,6 @@ This repository combines a backend API and a modern Android app for generating a
 - In the center, there’s an emulator currently generating new codes.
 - On the right, there’s a physical device actively scanning in real time.
 
-
-Uploading Screen Recording 2025-05-26 at 1.18.59 PM.mov…
+https://github.com/user-attachments/assets/387208c8-f667-41b9-90ca-6cd0556102c2
 
 ---
