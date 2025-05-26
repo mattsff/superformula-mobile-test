@@ -7,6 +7,7 @@ import com.qrapp.domain.model.QrSeed
 import com.qrapp.domain.usecase.ObserveAutoRefreshingSeedUseCase
 import com.qrapp.domain.util.AppException
 import com.qrapp.domain.util.Result
+import com.qrapp.presentation.utils.dispatcher.DispatcherProvider
 import com.qrapp.presentation.utils.generateQrCodeBitmap
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Duration
 import java.time.Instant
 import javax.inject.Inject
@@ -26,6 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class QrViewModel @Inject constructor(
     private val observeAutoRefreshingSeedUseCase: ObserveAutoRefreshingSeedUseCase,
+    private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
     data class QrUiState(
@@ -34,7 +37,7 @@ class QrViewModel @Inject constructor(
         val qrBitmap: Bitmap? = null,
         val error: AppException? = null,
         val isSeedExpired: Boolean = false,
-        val timeLeft: String = ""
+        val timeLeft: String = "",
     )
 
     private val _uiState = MutableStateFlow(QrUiState(isLoading = true))
@@ -95,7 +98,7 @@ class QrViewModel @Inject constructor(
 
     private fun startTimer(expiresAt: Instant) {
         timerJob?.cancel()
-        timerJob = viewModelScope.launch {
+        timerJob = viewModelScope.launch(dispatcherProvider.main()) {
             while (true) {
                 val now = Instant.now()
                 val duration = Duration.between(now, expiresAt)
@@ -109,7 +112,9 @@ class QrViewModel @Inject constructor(
                     val formatted = String.format("%02d:%02d", min, sec)
                     _uiState.update { it.copy(timeLeft = formatted) }
                 }
-                delay(1000)
+                withContext(dispatcherProvider.io()) {
+                    delay(1000)
+                }
             }
         }
     }

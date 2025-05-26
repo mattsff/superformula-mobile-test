@@ -6,6 +6,7 @@ import com.qrapp.domain.model.QrScanResult
 import com.qrapp.domain.usecase.ValidateScannedCodeUseCase
 import com.qrapp.domain.util.AppException
 import com.qrapp.domain.util.Result
+import com.qrapp.presentation.utils.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScanViewModel @Inject constructor(
     private val validateScannedCodeUseCase: ValidateScannedCodeUseCase,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
     data class ScanUiState(
@@ -36,7 +38,7 @@ class ScanViewModel @Inject constructor(
     fun onQrCodeScanned(scannedCode: String) {
         _uiState.update { it.copy(isLoading = true, error = null, shouldResetScanner = false) }
 
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcherProvider.io()) {
 
             when (val result = validateScannedCodeUseCase(scannedCode)) {
                 is Result.Success -> {
@@ -63,10 +65,6 @@ class ScanViewModel @Inject constructor(
 
 
         }
-    }
-
-    fun errorShown() {
-        // No-op, error is cleared only on resetScan now
     }
 
     fun resetScan() {
